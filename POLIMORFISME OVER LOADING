@@ -1,0 +1,54 @@
+# Contoh Polimorfisme + Overloading di Python
+
+class BangunDatar:
+    def luas(self, *args):
+        pass
+
+
+class Persegi(BangunDatar):
+    def luas(self, sisi):
+        return sisi * sisi
+
+
+class PersegiPanjang(BangunDatar):
+    def luas(self, panjang, lebar):
+        return panjang * lebar
+
+
+class Lingkaran(BangunDatar):
+    def luas(self, jari_jari):
+        return 3.14 * jari_jari * jari_jari
+
+
+# Overloading menggunakan *args
+class KalkulatorLuas:
+    def hitung(self, *args):
+        if len(args) == 1:
+            # Persegi
+            sisi = args[0]
+            return sisi * sisi
+        elif len(args) == 2:
+            # Persegi Panjang
+            panjang, lebar = args
+            return panjang * lebar
+        else:
+            return "Parameter tidak valid"
+
+
+# ======= PEMANGGILAN =======
+
+bangun = [
+    Persegi(),
+    PersegiPanjang(),
+    Lingkaran()
+]
+
+print("=== POLIMORFISME ===")
+print("Luas Persegi:", bangun[0].luas(5))
+print("Luas Persegi Panjang:", bangun[1].luas(4, 6))
+print("Luas Lingkaran:", bangun[2].luas(7))
+
+print("\n=== OVERLOADING ===")
+kalkulator = KalkulatorLuas()
+print("Luas Persegi:", kalkulator.hitung(5))
+print("Luas Persegi Panjang:", kalkulator.hitung(4, 6))
